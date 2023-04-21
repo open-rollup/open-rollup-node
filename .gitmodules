@@ -1,0 +1,3 @@
+[submodule "pallets/open-rollup"]
+	path = pallets/open-rollup
+	url = https://github.com/open-rollup/pallet-open-rollup

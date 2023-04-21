@@ -278,6 +278,90 @@ impl pallet_template::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 }
 
+/// for pallet-open-rollup
+use frame_system::EnsureRoot;
+use frame_support::traits::AsEnsureOriginWithArg;
+use frame_system::EnsureSigned;
+
+use frame_support::PalletId;
+
+const DOLLARS: Balance = 1;
+parameter_types! {
+	pub const AssetDeposit: Balance = 100 * DOLLARS;
+	pub const ApprovalDeposit: Balance = 1 * DOLLARS;
+	pub const StringLimit: u32 = 50;
+	pub const MetadataDepositBase: Balance = 10 * DOLLARS;
+	pub const MetadataDepositPerByte: Balance = 1 * DOLLARS;
+}
+
+impl pallet_assets::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Balance = u128;
+	type AssetId = u32;
+	type Currency = Balances;
+	type ForceOrigin = EnsureRoot<AccountId>;
+	type AssetDeposit = AssetDeposit;
+	type AssetAccountDeposit = ConstU128<DOLLARS>;
+	type MetadataDepositBase = MetadataDepositBase;
+	type MetadataDepositPerByte = MetadataDepositPerByte;
+	type ApprovalDeposit = ApprovalDeposit;
+	type StringLimit = StringLimit;
+	type Freezer = ();
+	type Extra = ();
+	type WeightInfo = pallet_assets::weights::SubstrateWeight<Runtime>;
+}
+
+parameter_types! {
+	pub const CollectionDeposit: Balance = 100 * DOLLARS;
+	pub const ItemDeposit: Balance = 1 * DOLLARS;
+	pub const KeyLimit: u32 = 32;
+	pub const ValueLimit: u32 = 256;
+}
+
+impl pallet_uniques::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type CollectionId = u32;
+	type ItemId = u32;
+	type Currency = Balances;
+	type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+	type CollectionDeposit = CollectionDeposit;
+	type ItemDeposit = ItemDeposit;
+	type MetadataDepositBase = MetadataDepositBase;
+	type AttributeDepositBase = MetadataDepositBase;
+	type DepositPerByte = MetadataDepositPerByte;
+	type StringLimit = StringLimit;
+	type KeyLimit = KeyLimit;
+	type ValueLimit = ValueLimit;
+	type WeightInfo = pallet_uniques::weights::SubstrateWeight<Runtime>;
+	#[cfg(feature = "runtime-benchmarks")]
+	type Helper = ();
+	type CreateOrigin = AsEnsureOriginWithArg<EnsureSigned<AccountId>>;
+	type Locker = ();
+}
+
+
+parameter_types! {
+	pub const OpenRollupPalletId: PalletId = PalletId(*b"openroll");
+}
+
+impl pallet_open_rollup::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type ProgramHash = Hash;
+	type StateRoot = Hash;
+	type PalletId = OpenRollupPalletId;
+	type Currency = Balances;
+	type Fungibles = Assets;
+	type Nonfungibles = Uniques;
+	type WeightInfo = ();
+	type MaxStorageKeyLen = ConstU32<128>;
+	type AssetsLimit = ConstU32<10>;
+	type AssetsItemLimit = ConstU32<11>;
+	type L1OperationLimit = ConstU32<300>;
+	type NonfungibleItemLimit = ConstU32<100>;
+	#[cfg(feature = "runtime-benchmarks")]
+	type Helper = ();
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub struct Runtime
@@ -296,6 +380,10 @@ construct_runtime!(
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-template in the runtime.
 		TemplateModule: pallet_template,
+		// for pallet-open-rollup
+		Assets: pallet_assets,
+		Uniques: pallet_uniques,
+		OpenRollup: pallet_open_rollup,
 	}
 );
 
@@ -343,6 +431,9 @@ mod benches {
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
 		[pallet_template, TemplateModule]
+		[pallet_assets, Assets]
+		[pallet_uniques, Uniques]
+		[pallet_open_rollup, OpenRollup]
 	);
 }
 
