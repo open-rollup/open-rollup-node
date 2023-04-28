@@ -56,7 +56,8 @@ pallet-assets = { version = "4.0.0-dev", default-features = false, git = "https:
 pallet-open-rollup = { default-features = false, path = "../pallets/open-rollup" }
 
 [build-dependencies]
-substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.31" }
+# substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "master" }
+substrate-wasm-builder = { path = "../wasm-builder" }
 
 [features]
 default = ["std"]

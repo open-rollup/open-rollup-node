@@ -3390,6 +3390,7 @@ dependencies = [
 [[package]]
 name = "miden-air"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "miden-core",
  "winter-air",
@@ -3398,6 +3399,7 @@ dependencies = [
 [[package]]
 name = "miden-assembly"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "miden-core",
  "num_enum",
@@ -3406,6 +3408,7 @@ dependencies = [
 [[package]]
 name = "miden-core"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "miden-crypto",
  "winter-crypto",
@@ -3428,6 +3431,7 @@ dependencies = [
 [[package]]
 name = "miden-processor"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "log",
  "miden-core",
@@ -3437,6 +3441,7 @@ dependencies = [
 [[package]]
 name = "miden-prover"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "log",
  "miden-air",
@@ -3447,6 +3452,7 @@ dependencies = [
 [[package]]
 name = "miden-stdlib"
 version = "0.4.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "miden-assembly",
 ]
@@ -3454,6 +3460,7 @@ dependencies = [
 [[package]]
 name = "miden-verifier"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "miden-air",
  "miden-core",
@@ -3463,6 +3470,7 @@ dependencies = [
 [[package]]
 name = "miden-vm"
 version = "0.5.0"
+source = "git+https://github.com/open-rollup/miden-vm-fix-no-std.git?branch=pallet-open-rollup#05be1dc07d89f4628f45b71206e143d08ac14075"
 dependencies = [
  "log",
  "miden-assembly",
@@ -5490,7 +5498,7 @@ dependencies = [
  "environmental",
  "parity-scale-codec",
  "sc-allocator",
- "sp-maybe-compressed-blob",
+ "sp-maybe-compressed-blob 4.1.0-dev (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.31)",
  "sp-sandbox",
  "sp-wasm-interface",
  "thiserror",
@@ -6891,6 +6899,14 @@ dependencies = [
 [[package]]
 name = "sp-maybe-compressed-blob"
 version = "4.1.0-dev"
+dependencies = [
+ "thiserror",
+ "zstd",
+]
+
+[[package]]
+name = "sp-maybe-compressed-blob"
+version = "4.1.0-dev"
 source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.31#7a4e5163091384c4c10b6d76f5cb80dac0834f38"
 dependencies = [
  "thiserror",
@@ -7388,13 +7404,12 @@ dependencies = [
 [[package]]
 name = "substrate-wasm-builder"
 version = "5.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.31#7a4e5163091384c4c10b6d76f5cb80dac0834f38"
 dependencies = [
  "ansi_term",
  "build-helper",
  "cargo_metadata",
  "filetime",
- "sp-maybe-compressed-blob",
+ "sp-maybe-compressed-blob 4.1.0-dev",
  "strum",
  "tempfile",
  "toml",
