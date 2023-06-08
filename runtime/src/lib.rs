@@ -353,7 +353,6 @@ impl pallet_open_rollup::Config for Runtime {
 	type Fungibles = Assets;
 	type Nonfungibles = Uniques;
 	type WeightInfo = ();
-	type MaxStorageKeyLen = ConstU32<128>;
 	type AssetsLimit = ConstU32<10>;
 	type AssetsItemLimit = ConstU32<11>;
 	type L1OperationLimit = ConstU32<300>;
